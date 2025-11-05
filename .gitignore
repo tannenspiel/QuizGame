@@ -1,0 +1,3 @@
+# Игнорировать run_server.bat в любых папках
+run_server.bat
+**/run_server.bat
