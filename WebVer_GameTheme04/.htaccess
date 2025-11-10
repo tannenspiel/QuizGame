@@ -1,0 +1,12 @@
+# .htaccess для WebAssembly игры
+<IfModule mod_mime.c>
+    # WebAssembly (обязательно)
+    AddType application/wasm .wasm
+    
+    # JavaScript
+    AddType application/javascript .js
+    
+    # Бинарные данные
+    AddType application/octet-stream .data
+</IfModule>
+
