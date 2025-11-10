@@ -1,4 +1,6 @@
 # .htaccess для WebAssembly игры
+# Настройки для корректной работы на всех платформах (ПК и мобильные)
+
 <IfModule mod_mime.c>
     # WebAssembly (обязательно)
     AddType application/wasm .wasm
@@ -9,4 +11,40 @@
     # Бинарные данные
     AddType application/octet-stream .data
 </IfModule>
+
+# CORS заголовки для кросс-доменных запросов (если нужно)
+<IfModule mod_headers.c>
+    # Разрешаем загрузку ресурсов для всех доменов
+    Header set Access-Control-Allow-Origin "*"
+    
+    # Разрешаем необходимые методы
+    Header set Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+    
+    # Разрешаем необходимые заголовки
+    Header set Access-Control-Allow-Headers "Content-Type, Range"
+    
+    # Кэширование для .wasm и .data файлов (улучшает загрузку на мобильных)
+    <FilesMatch "\.(wasm|data)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    
+    # Кэширование для .js файлов
+    <FilesMatch "\.js$">
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+</IfModule>
+
+# Разрешаем загрузку больших файлов (важно для .data файлов на мобильных)
+<IfModule mod_php.c>
+    php_value upload_max_filesize 50M
+    php_value post_max_size 50M
+</IfModule>
+
+# Включаем сжатие для уменьшения размера файлов (важно для мобильных)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+</IfModule>
+
 
