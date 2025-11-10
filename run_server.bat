@@ -30,11 +30,11 @@ echo Found local IP: !IP_ADDR!
 :ip_found_manual
 echo.
 echo === LOCAL ACCESS ===
-echo On THIS computer: http://localhost:8000/GameTheme01.html
+echo On THIS computer: http://localhost:8000/GameTheme02.html
 echo.
 
 echo === PHONE ACCESS ===
-echo On your PHONE: http://!IP_ADDR!:8000/GameTheme01.html
+echo On your PHONE: http://!IP_ADDR!:8000/GameTheme02.html
 echo.
 
 echo === TROUBLESHOOTING ===
